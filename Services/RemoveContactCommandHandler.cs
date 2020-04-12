@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MediatR;
 using PhoneBook.Contacts.Commands;
 using PhoneBook.Data;
+using PhoneBook.Exceptions;
 
 namespace PhoneBook.Services
 {
@@ -20,7 +21,7 @@ namespace PhoneBook.Services
         {
             var contact = _context.Contacts.Find(request.Id);
 
-            if (contact == null) throw new InvalidOperationException($"Contact with id {request.Id} was not found");
+            if (contact == null) throw new ContactNotFoundException(request.Id);
 
             _context.Remove(contact);
             _context.SaveChanges();

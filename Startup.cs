@@ -6,6 +6,10 @@ using Microsoft.Extensions.Hosting;
 using PhoneBook.Data;
 using MediatR;
 using PhoneBook.Services;
+using Microsoft.AspNetCore.Diagnostics;
+using System.Text.Json;
+using Microsoft.AspNetCore.Http;
+using PhoneBook.Exceptions;
 
 namespace PhoneBook
 {
@@ -28,6 +32,24 @@ namespace PhoneBook
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseExceptionHandler(a => a.Run(async context =>
+            {
+                var feature = context.Features.Get<IExceptionHandlerPathFeature>();
+                var exception = feature.Error;
+
+                var result = JsonSerializer.Serialize(new { error = exception.Message });
+
+                context.Response.StatusCode = exception switch
+                {
+                    ContactNotFoundException e => 404,
+                    _ => 500
+                };
+
+                context.Response.ContentType = "application/json";
+
+                await context.Response.WriteAsync(result);
+            }));
 
             app.UseRouting();
 
