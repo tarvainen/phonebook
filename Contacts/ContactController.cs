@@ -21,7 +21,7 @@ namespace PhoneBook.Contacts
 
         [HttpPost("/")]
         public async Task<IActionResult> AddContact([FromBody] ContactDto contact) =>
-            Ok(await _mediator.Send(new AddContact(contact.Name, contact.PhoneNumber)));
+            Ok(await _mediator.Send(new AddContactCommand(contact.Name, contact.PhoneNumber)));
 
         [HttpGet("/")]
         public async Task<IActionResult> ListContacts() =>

@@ -7,7 +7,7 @@ using PhoneBook.Data;
 
 namespace PhoneBook.Services
 {
-    public class AddContactCommandHandler : IRequestHandler<AddContact, Contact>
+    public class AddContactCommandHandler : IRequestHandler<AddContactCommand, Contact>
     {
         private readonly DataContext _context;
 
@@ -16,7 +16,7 @@ namespace PhoneBook.Services
             _context = context;
         }
 
-        public Task<Contact> Handle(AddContact request, CancellationToken cancellationToken)
+        public Task<Contact> Handle(AddContactCommand request, CancellationToken cancellationToken)
         {
             var entity = _context.Add(new Contact(Guid.NewGuid().ToString(), request.Name, request.PhoneNumber)).Entity;
 
