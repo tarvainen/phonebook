@@ -4,6 +4,7 @@ using MediatR;
 using PhoneBook.Contacts.Commands;
 using System.Threading.Tasks;
 using PhoneBook.Contacts.Dto;
+using PhoneBook.Contacts.Queries;
 
 namespace PhoneBook.Contacts
 {
@@ -23,7 +24,8 @@ namespace PhoneBook.Contacts
             Ok(await _mediator.Send(new AddContact(contact.Name, contact.PhoneNumber)));
 
         [HttpGet("/")]
-        public IActionResult ListContacts() => Ok(_dataContext.Contacts);
+        public async Task<IActionResult> ListContacts() =>
+            Ok(await _mediator.Send(new GetAllContactsQuery()));
 
         [HttpDelete("/{id}")]
         public IActionResult DeleteContact([FromRoute] string id)

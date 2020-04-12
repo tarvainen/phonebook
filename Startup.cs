@@ -19,6 +19,7 @@ namespace PhoneBook
                 options.UseSqlite("Data Source=volumes/data.db"));
 
             services.AddMediatR(typeof(AddContactCommandHandler));
+            services.AddMediatR(typeof(GetAllContactsQueryHandler));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
