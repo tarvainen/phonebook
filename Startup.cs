@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PhoneBook.Data;
 using MediatR;
-using PhoneBook.Services;
+using PhoneBook.Handlers;
 using Microsoft.AspNetCore.Diagnostics;
 using System.Text.Json;
 using Microsoft.AspNetCore.Http;

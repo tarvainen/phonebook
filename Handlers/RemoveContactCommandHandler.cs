@@ -6,7 +6,7 @@ using PhoneBook.Contacts.Commands;
 using PhoneBook.Data;
 using PhoneBook.Exceptions;
 
-namespace PhoneBook.Services
+namespace PhoneBook.Handlers
 {
     public class RemoveContactCommandHandler : IRequestHandler<RemoveContactCommand, Contact>
     {

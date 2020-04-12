@@ -6,7 +6,7 @@ using MediatR;
 using PhoneBook.Contacts.Queries;
 using PhoneBook.Data;
 
-namespace PhoneBook.Services
+namespace PhoneBook.Handlers
 {
     public class GetAllContactsQueryHandler : IRequestHandler<GetAllContactsQuery, List<Contact>>
     {

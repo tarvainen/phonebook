@@ -5,7 +5,7 @@ using MediatR;
 using PhoneBook.Contacts.Commands;
 using PhoneBook.Data;
 
-namespace PhoneBook.Services
+namespace PhoneBook.Handlers
 {
     public class AddContactCommandHandler : IRequestHandler<AddContactCommand, Contact>
     {
