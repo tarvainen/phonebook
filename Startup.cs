@@ -22,17 +22,14 @@ namespace PhoneBook
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlite("Data Source=volumes/data.db"));
 
-            services.AddMediatR(typeof(AddContactCommandHandler));
-            services.AddMediatR(typeof(GetAllContactsQueryHandler));
+            services.AddMediatR(
+                typeof(AddContactCommandHandler),
+                typeof(GetAllContactsQueryHandler),
+                typeof(RemoveContactCommandHandler));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
             app.UseExceptionHandler(a => a.Run(async context =>
             {
                 var feature = context.Features.Get<IExceptionHandlerPathFeature>();
