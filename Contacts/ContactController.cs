@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using PhoneBook.Data;
 using MediatR;
 using PhoneBook.Contacts.Commands;
 using System.Threading.Tasks;
@@ -10,12 +9,10 @@ namespace PhoneBook.Contacts
 {
     public class ContactController : Controller
     {
-        private readonly DataContext _dataContext;
         private readonly IMediator _mediator;
 
-        public ContactController(DataContext dataContext, IMediator mediator)
+        public ContactController(IMediator mediator)
         {
-            _dataContext = dataContext;
             _mediator = mediator;
         }
 
@@ -28,17 +25,7 @@ namespace PhoneBook.Contacts
             Ok(await _mediator.Send(new GetAllContactsQuery()));
 
         [HttpDelete("/{id}")]
-        public IActionResult DeleteContact([FromRoute] string id)
-        {
-            var contact = _dataContext.Contacts.Find(id);
-
-            if (contact == null) return new NotFoundResult();
-
-            _dataContext.Contacts.Remove(contact);
-
-            _dataContext.SaveChanges();
-
-            return Ok();
-        }
+        public async Task<IActionResult> RemoveContact([FromRoute] string id) =>
+            Ok(await _mediator.Send(new RemoveContactCommand(id)));
     }
 }
