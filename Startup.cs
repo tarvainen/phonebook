@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PhoneBook.Data;
+using MediatR;
+using PhoneBook.Services;
 
 namespace PhoneBook
 {
@@ -15,6 +17,8 @@ namespace PhoneBook
 
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlite("Data Source=volumes/data.db"));
+
+            services.AddMediatR(typeof(AddContactCommandHandler));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

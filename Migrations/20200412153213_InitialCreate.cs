@@ -2,7 +2,7 @@
 
 namespace PhoneBook.Migrations
 {
-    public partial class InitialStructure : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,12 +18,6 @@ namespace PhoneBook.Migrations
                 {
                     table.PrimaryKey("PK_Contacts", x => x.Id);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Contacts_Name",
-                table: "Contacts",
-                column: "Name",
-                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
