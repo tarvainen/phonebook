@@ -28,7 +28,10 @@ namespace PhoneBook.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contaxts");
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Contacts");
                 });
 #pragma warning restore 612, 618
         }

@@ -12,6 +12,7 @@ namespace PhoneBook.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Contact>().HasIndex(x => x.Name).IsUnique();
         }
     }
 }

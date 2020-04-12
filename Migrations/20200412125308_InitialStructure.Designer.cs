@@ -8,8 +8,8 @@ using PhoneBook.Data;
 namespace PhoneBook.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200412123431_AddContact")]
-    partial class AddContact
+    [Migration("20200412125308_InitialStructure")]
+    partial class InitialStructure
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,6 +29,9 @@ namespace PhoneBook.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Contacts");
                 });
